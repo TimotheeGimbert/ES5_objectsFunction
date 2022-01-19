@@ -7,7 +7,16 @@ function Recipe (title, steps) {
 }
 
 Recipe.prototype.cook = function () {
-  console.log(this.steps[0]);
+  var recipeString = '';
+  this.steps.forEach(e => {
+    if (typeof(e[0] != String) && e.length > 2) {
+      if (e[3] === 'dry') recipeString += 'Add ' + e[0] + ' ' + e[1] + ' of ' + e[2] + ' to the bowl.\n ';
+      else if (e[3] === 'wet') recipeString += 'Pour ' + e[0] + ' ' + e[1] + ' of ' + e[2] + ' into the bowl.\n ';
+    }
+    else if (e.length === 1) recipeString += '\n' + e[0] + '\n';
+    else if (e.length === 2) recipeString += '\n Then, heat ' + e[1] + ' minutes in the oven at ' + e[0] + ' degrees.';
+  });
+  console.log(recipeString);
 }
 
 var stepsRecipe01 = [
